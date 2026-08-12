@@ -138,6 +138,10 @@
             .avatar {
                 border: 2px solid #333 !important;
             }
+            .life-photo,
+            .cert-img {
+                border: 1px solid #ccc !important;
+            }
         }
 
         /* ===== 通用 ===== */
@@ -685,6 +689,35 @@
             transition: width 0.8s ease;
         }
 
+        /* ===== 生活剪影 ===== */
+        .life-section .life-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+        }
+        .life-photo {
+            max-width: 100%;
+            max-height: 400px;
+            border-radius: var(--radius-sm);
+            box-shadow: 0 4px 20px var(--color-shadow);
+            border: 1px solid var(--color-border);
+            transition: transform var(--transition), box-shadow var(--transition);
+            object-fit: cover;
+            width: 100%;
+            height: auto;
+        }
+        .life-photo:hover {
+            transform: scale(1.01);
+            box-shadow: 0 12px 36px var(--color-shadow-hover);
+        }
+        .life-caption {
+            font-size: 0.9rem;
+            color: var(--color-text-secondary);
+            text-align: center;
+            font-style: italic;
+        }
+
         /* ===== 教育&证书 ===== */
         .edu-cert-grid {
             display: grid;
@@ -740,6 +773,19 @@
         .cert-item .cert-date {
             color: var(--color-text-muted);
             font-size: 0.8rem;
+        }
+        .cert-img-wrapper {
+            margin-top: 16px;
+            text-align: center;
+        }
+        .cert-img {
+            max-width: 100%;
+            max-height: 180px;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--color-border);
+            box-shadow: 0 2px 12px var(--color-shadow);
+            object-fit: contain;
+            background: var(--color-bg);
         }
 
         /* ===== 页脚 ===== */
@@ -888,6 +934,9 @@
                 width: 70px;
                 height: 70px;
             }
+            .life-photo {
+                max-height: 250px;
+            }
         }
 
         @media (max-width: 420px) {
@@ -915,6 +964,9 @@
             .avatar {
                 width: 60px;
                 height: 60px;
+            }
+            .life-photo {
+                max-height: 200px;
             }
         }
 
@@ -959,6 +1011,7 @@
                 <li><a href="#experience">经历</a></li>
                 <li><a href="#projects">项目</a></li>
                 <li><a href="#skills">技能</a></li>
+                <li><a href="#life">生活</a></li>
                 <li><a href="#education">教育</a></li>
             </ul>
             <div class="nav-actions">
@@ -979,7 +1032,7 @@
             <div class="container">
                 <div class="hero-inner">
                     <div class="hero-left">
-                        <img src="cyh.jpg" alt="陈宇涵头像" class="avatar" onerror="this.style.display='none'">
+                        <img src="白证件.jpg" alt="陈宇涵头像" class="avatar" onerror="this.style.display='none'">
                         <h1>陈宇涵</h1>
                         <div class="subtitle">科学教育 · AI训练师 · 教育科技探索者</div>
                         <p class="bio">
@@ -993,6 +1046,7 @@
                         <div class="hero-actions">
                             <button class="contact-btn" id="emailBtn">📧 复制邮箱</button>
                             <button class="contact-btn contact-btn-outline" id="phoneBtn">📱 复制电话</button>
+                            <a href="https://github.com/cham-cor" target="_blank" class="contact-btn contact-btn-outline" style="text-decoration:none;">🐙 GitHub</a>
                         </div>
                     </div>
                     <div class="hero-right" id="heroStats">
@@ -1054,6 +1108,17 @@
             </div>
         </section>
 
+        <!-- 生活剪影 -->
+        <section id="life" class="section" style="padding-top:16px;">
+            <div class="container">
+                <h2 class="section-title">📸 生活剪影</h2>
+                <div class="card life-card">
+                    <img src="青岛.jpg" alt="生活照 · 青岛" class="life-photo" onerror="this.style.display='none'">
+                    <p class="life-caption">🌊 在青岛 · 保持热爱，奔赴山海</p>
+                </div>
+            </div>
+        </section>
+
         <!-- 教育 & 证书 -->
         <section id="education" class="section" style="padding-top:16px;">
             <div class="container">
@@ -1082,11 +1147,11 @@
         // ============================================================
         const resume = {
             name: '陈宇涵',
-            phone: '【待补】',
-            email: 'chenyuhan' + '@' + 'example.com', // 防爬虫拼接
+            phone: '15259116632',
+            email: '2405225397' + '@' + 'qq.com', // 防爬虫拼接
             location: '浙江·杭州',
-            linkedin: '【待补】',
-            github: '【待补】',
+            linkedin: '无',
+            github: 'cham-cor',
 
             heroTags: ['阿里AI训练师认证', 'Python / Pandas', '教育科技', 'STEAM教育', '数据驱动决策'],
             heroStats: [
@@ -1172,7 +1237,7 @@
                 major: '科学教育（师范）专业',
                 status: '本科（26级在读）',
                 grad: '2030年6月',
-                gpa: '【待补】/4.0',
+                gpa: '3.8/4.0',
                 courses: '教育学原理 · 教育心理学 · 科学课程与教学论 · 教育技术应用 · 教育统计与测量 · 信息技术与课程整合'
             },
 
@@ -1418,6 +1483,9 @@
                             <span class="cert-date">${c.issuer} ${c.year ? '· '+c.year : ''}</span>
                         </div>
                     `).join('') : '<div class="text-muted" style="font-size:0.85rem;">暂无证书信息</div>'}
+                    <div class="cert-img-wrapper">
+                        <img src="阿里ai初级.jpg" alt="阿里AI训练师证书" class="cert-img" onerror="this.style.display='none'">
+                    </div>
                 </div>
             `;
             container.innerHTML = html;
